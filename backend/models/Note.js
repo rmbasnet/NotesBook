@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 //create a schema
 //model based off of that schema
@@ -18,5 +18,5 @@ const noteSchema = new mongoose.Schema(
     { timestamps: true } //created at Updated At
 );
 
-const Note = mongoose.model("Note", noteSchema)
-module.exports = Note;
+const Note = mongoose.model("Note", noteSchema);
+export default Note;

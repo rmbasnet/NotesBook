@@ -1,6 +1,7 @@
-const Note = require('../models/Note');
+import Note from '../models/Note.js';
+// const Note = require('../models/Note.js');
 
-async function getAllNotes(_, res) {
+export async function getAllNotes(_, res) {
     try {
         const notes = await Note.find().sort({ createdAt: -1 });//note.find() gets every single one of the note
         res.status(200).json(notes); //sucessful response. 
@@ -11,7 +12,7 @@ async function getAllNotes(_, res) {
     }
 }
 
-async function createNote(req, res) {
+export async function createNote(req, res) {
     try {
         const { title, content } = req.body;
         const note = new Note({ title, content });
@@ -26,7 +27,7 @@ async function createNote(req, res) {
     res.status(201).json({ message: "post created successfully" });
 }
 
-async function updateNote(req, res) {
+export async function updateNote(req, res) {
     try {
         const { title, content } = req.body
         //post method getting the ID of the NOTE nad then updating the title and the content. 
@@ -41,7 +42,7 @@ async function updateNote(req, res) {
     }
 }
 
-async function deleteNote(req, res) {
+export async function deleteNote(req, res) {
     try {
         const deletedNote = await Note.findByIdAndDelete(req.params.id);
         if (!deletedNote) return res.status(404).json({ message: "Note not found" });
@@ -52,7 +53,7 @@ async function deleteNote(req, res) {
     }
 }
 
-async function getNoteById(req, res) {
+export async function getNoteById(req, res) {
     try {
         const note = await Note.findById(req.params.id);
         if (!note) return res.status(404).json({ message: "no note found" });
@@ -63,4 +64,6 @@ async function getNoteById(req, res) {
     }
 }
 
-module.exports = { createNote, getAllNotes, updateNote, deleteNote, getNoteById };
+
+
+// module.exports = { createNote, getAllNotes, updateNote, deleteNote, getNoteById };
