@@ -1,5 +1,5 @@
 import express from "express";
-// import cors from "cors";
+import cors from "cors";
 import dotenv from "dotenv";
 // import path from "path";
 
@@ -16,6 +16,9 @@ connectDB();
 
 //middleware
 //most useful stuff would be the authentication check
+app.use(cors({
+    origin: "http://localhost:5173",
+}));
 app.use(express.json());//will parse the json bodies
 app.use(rateLimiter); //checks for rate limiting
 
